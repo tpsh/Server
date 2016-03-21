@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
-import json
-from bson import json_util
+# import json
+# from bson import json_util
 from models import Mesurement
 
 from jinja2 import Environment, PackageLoader
@@ -17,12 +17,12 @@ def index():
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
-@app.route('/get')
-def hello():
-    a = Mesurement.query.raw_output()
-    a = a.filter(Mesurement.humidity > 3).all()
-
-    return json.dumps(a, default=json_util.default)
+# @app.route('/get')
+# def hello():
+#     a = Mesurement.query.raw_output()
+#     a = a.filter(Mesurement.humidity > 3).all()
+#
+#     return json.dumps(a, default=json_util.default)
 
 @app.route('/create')
 def create():
@@ -37,9 +37,9 @@ def create():
     mesurement.save()
     return 'created'
 
-@app.route('/submit_get')
-def submit_get():
-    return json.dumps(request.args)
+# @app.route('/submit_get')
+# def submit_get():
+#     return json.dumps(request.args)
 
 @app.route('/submit', methods=['POST'])
 def submit():
