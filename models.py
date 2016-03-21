@@ -25,4 +25,5 @@ class Mesurement(db.Document):
     light = db.FloatField()
     wind_speed = db.FloatField()
     press = db.FloatField()
+    voltage = db.FloatField()
     date = db.DateTimeField()
