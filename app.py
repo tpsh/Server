@@ -9,6 +9,7 @@ env = Environment(loader=PackageLoader(__name__, 'templates'))
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     a = Mesurement.query.raw_output()
@@ -38,6 +39,15 @@ def create():
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    mesurement = Mesurement(temp=2,
+                            ground_temp=2.5,
+                            light=0.33,
+                            wind_speed=22,
+                            wind_direction=0.33,
+                            pressure=5,
+                            humidity=5
+                            )
+    mesurement.save()
     print(json.loads(request.data.decode("utf-8")))
     return "asd"
 
