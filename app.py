@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
-# import json
+from datetime import datetime
+import json
 # from bson import json_util
 from models import Mesurement
 
@@ -43,17 +44,16 @@ def create():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    mesurement = Mesurement(temp=2,
-                            ground_temp=2.5,
-                            light=0.33,
-                            wind_speed=22,
-                            wind_direction=0.33,
-                            pressure=5,
-                            humidity=5
+    data_srt = request.data.decode("utf-8")
+    data = json.loads(data_srt)
+    mesurement = Mesurement(temp=data['temp'],
+                            light=data['light'],
+                            wind_speed=data['wind'],
+                            press=data['press'],
+                            date=datetime.today()
                             )
     mesurement.save()
-    print(json.loads(request.data.decode("utf-8")))
-    return "asd"
+    return data_srt
 
 if __name__ == '__main__':
     app.run(debug=True) #app.run()
