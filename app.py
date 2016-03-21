@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     a = Mesurement.query.raw_output()
-    a = a.filter(Mesurement.humidity > 3).all()
+    a = a.all()
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
