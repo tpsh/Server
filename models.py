@@ -5,11 +5,14 @@ app = Flask(__name__)
 
 
 MONGO_URL = os.environ.get('MONGOHQ_URL')
+print("MONGO_URL", MONGO_URL)
 if MONGO_URL:
   # Get client
+  print("Connected with MONGO_URL")
   app.config['MONGOALCHEMY_CONNECTION_STRING'] = MONGO_URL
   app.config['MONGOALCHEMY_DATABASE'] = 'heroku_xzpnfqgh'
 else:
+  print("Connected with local")
   # Not on an app with the MongoHQ add-on, do some localhost action
   app.config['MONGOALCHEMY_DATABASE'] = 'library'
 
