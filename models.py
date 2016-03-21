@@ -4,8 +4,8 @@ import os
 app = Flask(__name__)
 
 
-MONGO_URL = os.environ.get('MONGOHQ_URL')
-print("MONGO_URL", MONGO_URL)
+MONGO_URL = os.environ.get('MONGOLAB_URI')
+print("MONGOLAB_URI", MONGO_URL)
 if MONGO_URL:
   # Get client
   print("Connected with MONGO_URL")
