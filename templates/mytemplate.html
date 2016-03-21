@@ -1,5 +1,11 @@
 <ul>
   {% for item in mesurements %}
-      <li>{{ item.humidity }}</li>
+      <li>
+         Temperature: {{ item.temp }} <br />
+         Light: {{ item.light }} <br />
+         Wind Speed: {{ item.wind_speed }} <br />
+         Pressure: {{ item.press }} <br />
+         Date: {{ item.date }} <br />
+      </li>
   {% endfor %}
 </ul>

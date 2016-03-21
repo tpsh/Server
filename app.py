@@ -44,16 +44,18 @@ def create():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    data_srt = request.data.decode("utf-8")
-    data = json.loads(data_srt)
-    mesurement = Mesurement(temp=data['temp'],
-                            light=data['light'],
-                            wind_speed=data['wind'],
-                            press=data['press'],
-                            date=datetime.today()
-                            )
-    mesurement.save()
-    return data_srt
+    print(request.data)
+    # data_srt = request.data.decode("utf-8")
+    # data = json.loads(data_srt)
+    # mesurement = Mesurement(temp=data['temp'],
+    #                         light=data['light'],
+    #                         wind_speed=data['wind'],
+    #                         press=data['press'],
+    #                         date=datetime.today()
+    #                         )
+    # mesurement.save()
+    # return data_srt
+    return ""
 
 if __name__ == '__main__':
     app.run(debug=True) #app.run()
