@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from datetime import datetime
 import json
+import pandas as pd
 # from bson import json_util
 from models import Mesurement
 
@@ -15,6 +16,15 @@ app = Flask(__name__)
 def index():
     a = Mesurement.query.raw_output()
     a = a.all()
+    template = env.get_template('mytemplate.html')
+    return template.render(mesurements=a)
+
+@app.route('/pandas')
+def pandas():
+    a = Mesurement.query.raw_output()
+    a = a.all()
+    df = pd.DataFrame(list(a))
+    print(df.describe())
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
