@@ -38,6 +38,7 @@ def submit():
                             wind_speed=data['wind'],
                             press=data['press'],
                             voltage=data['voltage'],
+                            team=data['team'],
                             date=datetime.today()
                             )
     mesurement.save()
