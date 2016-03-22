@@ -1,10 +1,10 @@
 from flask import Flask
 from flask import request
-from models import Mesurement, Clothes
+# from models import Mesurement, Clothes
 from datetime import datetime
 
 import json
-from bson import json_util
+# from bson import json_util
 app = Flask(__name__)
 
 from jinja2 import Environment, PackageLoader
@@ -12,8 +12,8 @@ env = Environment(loader=PackageLoader(__name__, 'templates'))
 
 @app.route('/')
 def index():
-    a = Mesurement.query.raw_output()
-    a = a.filter(Mesurement.temp > 3).all()
+    # a = Mesurement.query.raw_output()
+    # a = a.filter(Mesurement.temp > 3).all()
     template = env.get_template('MyTemplate.html')
     return template.render()
 
