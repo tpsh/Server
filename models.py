@@ -6,9 +6,12 @@ db = MongoAlchemy(app)
 
 class Mesurement(db.Document):
     temp = db.FloatField()
-    ground_temp = db.FloatField()
-    light = db.FloatField()
+    illumination = db.FloatField()
     wind_speed = db.FloatField()
-    wind_direction = db.FloatField()
     pressure = db.FloatField()
-    humidity = db.FloatField()
+    date = db.DateTimeField()
+
+class Clothes(db.Document):
+    temp = db.FloatField()
+    name = db.StringField()
+    part_of_the_body = db.StringField()
