@@ -24,7 +24,7 @@ def pandas():
     a = Mesurement.query.raw_output()
     a = a.all()
     df = pd.DataFrame(list(a))
-    print(df.describe())
+    print(df.head())
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 

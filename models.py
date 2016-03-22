@@ -26,4 +26,5 @@ class Mesurement(db.Document):
     wind_speed = db.FloatField()
     press = db.FloatField()
     voltage = db.FloatField()
-    date = db.DateTimeField()
+    team = db.IntField()
+    date = db.DateTimeField()    
