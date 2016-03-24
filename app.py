@@ -27,7 +27,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     a = Mesurement.query.raw_output()
-    a = a.ascending('date').limit(20)
+    a = a.descending('date').limit(20)
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
