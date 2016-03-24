@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, send_from_directory
 from models import Mesurement, Clothes
 from datetime import datetime
 
@@ -8,56 +7,63 @@ from bson import json_util
 app = Flask(__name__)
 
 from jinja2 import Environment, PackageLoader
-env = Environment(loader=PackageLoader(__name__, 'templates/Template'))
-app.config['STATIC_FOLDER'] = 'templates/Template'
+env = Environment(loader=PackageLoader(__name__, 'templates'))
+app.config['STATIC_FOLDER'] = 'templates'
+
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('templates/Template/css', path)
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('templates/Template/js', path)
+@app.route('/img/<path:path>')
+def send_img(path):
+    return send_from_directory('templates/Template/img', path)
+@app.route('/src/<path:path>')
+def send_src(path):
+    return send_from_directory('templates/Template/src', path)
+
 
 @app.route('/')
 def index():
-    # a = Mesurement.query.raw_output()
-    # a = a.filter(Mesurement.temp > 3).all()
 
-
-    cloth = Clothes.query.raw_output()
-    cloth = cloth.all()
-    Date = Mesurement.query.raw_output()
-    Date = Date.descending(Mesurement.date).limit(1).one()
-
-    k=0.1
-    N=['','','','']
-    temp_f = Date['temp'] - (Date['wind_speed']*k)
-    Min = 100000
-
-    for element in cloth:
-        T = element['temp'] - temp_f
-        if(T<0):
-            T = T*(-1)
-        if(T<=Min):
-            Min = T
-            if(element['part_of_the_body'] == "body"):
-                N[1] = element['name']
-            if(element['part_of_the_body'] == "head"):
-                N[0] = element['name']
-            if(element['part_of_the_body'] == "legs"):
-                N[2] = element['name']
-            if(element['part_of_the_body'] == "Feet"):
-                N[3] = element['name']
-    template = env.get_template('index.html')
-
-    # return json.dumps(N, default=json_util.default)
-    return template.render()
+ #  Функция, необходимая для выборки одежды из базы данных одежды
+    # cloth = Clothes.query.raw_output()
+    # cloth = cloth.all()
+    # Date = Mesurement.query.raw_output()
+    # Date = Date.descending(Mesurement.date).limit(1).one()
+    # k=0.1
+    # N=['','','','']
+    # temp_f = Date['temp'] - (Date['wind_speed']*k)
+    # Min = 100000
     # for element in cloth:
-    #      print(element)
-    #     ST = element['temp']
-    #     T = ST - temp_f
+    #     T = element['temp'] - temp_f
     #     if(T<0):
     #         T = T*(-1)
-    #     if(T<Min):
+    #     if(T<=Min):
     #         Min = T
-    #         i = element['name']
+    #         if(element['part_of_the_body'] == "body"):
+    #             N[1] = element['name']
+    #         if(element['part_of_the_body'] == "head"):
+    #             N[0] = element['name']
+    #         if(element['part_of_the_body'] == "legs"):
+    #             N[2] = element['name']
+    #         if(element['part_of_the_body'] == "Feet"):
+    #             N[3] = element['name']
 
 
-    # template = env.get_template('MyTemplate.html')
+    a = Mesurement.query.raw_output()
+    a = a.descending(Mesurement.date).limit(1).one()
+    print('a = ', a)
+    if(a['temp']<0):
+        Z ='-'
+    else:
+        Z='+'
 
+    template = env.get_template('Template/index.html')
+    return template.render(Z=Z, mesurement = a)
+    # return json.dumps(N, default=json_util.default)
 
 @app.route('/create')
 def create():
@@ -70,48 +76,18 @@ def create_cloths():
     clothes = Clothes(name="Sandali", temp = 20, part_of_the_body = "Feet")
     clothes.save()
     return 'Сlothing created'
-# создать четыре типа одежды: головной убор, торс, ноги, стопы на три сезона: -30, -15, +20
-@app.route('/get')
-def get():
-    data = Mesurement.query.raw_output()
-    data = data.filter(Mesurement.temp > 0).limit(1).one()
 
+@app.route('/get_all_readings)
+def get_all_testimony():
 
-
-    return json.dumps(data, default=json_util.default)
-
-@app.route('/get_cloths')
-def get_cloths():
-    cloth = Clothes.query.raw_output()
-    cloth = cloth.all()
-
-    Date = Mesurement.query.raw_output()
-    Date = Date.ascending(Mesurement.date).limit(1).one()
-    print(Date, Date['temp'])
-
-
-    k=0.5
-    i=''
-    temp_f = Date['temp'] - (Date['wind_speed']*k)
-    Min = 100000
-    for element in cloth:
-        # print(element)
-        ST = element['temp']
-        T = ST - temp_f
-        if(T<0):
-            T = T*(-1)
-        if(T<Min):
-            Min = T
-            i = element['name']
-
-    return json.dumps(i, default=json_util.default)
-    # return ()
+    readings = Mesurement.query.raw_output()
+    readings = readings.all()
 
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    data = json.loads(request.data.decode("utf-8"))
 
+    data = json.loads(request.data.decode("utf-8"))
     for element in data:
         mesuremsent = Mesurement(temp = element['temp'],
                                  illumination = element['illumination'],
@@ -123,6 +99,46 @@ def submit():
     return "saved"
 
 
-
 if __name__ == '__main__':
     app.run(debug=True) #app.run()
+
+
+# создать четыре типа одежды: головной убор, торс, ноги, стопы на три сезона: -30, -15, +20
+
+
+# @app.route('/get')
+# def get():
+#     data = Mesurement.query.raw_output()
+#     data = data.filter(Mesurement.temp > 0).limit(1).one()
+#
+#     return json.dumps(data, default=json_util.default)
+
+
+
+
+# @app.route('/get_cloths')
+# def get_cloths():
+#
+#     cloth = Clothes.query.raw_output()
+#     cloth = cloth.all()
+#     Date = Mesurement.query.raw_output()
+#     Date = Date.ascending(Mesurement.date).limit(1).one()
+#     # print(Date, Date['temp'])
+#
+#     k=0.5
+#     i=''
+#     temp_f = Date['temp'] - (Date['wind_speed']*k)
+#     Min = 100000
+#     for element in cloth:
+#         # print(element)
+#         ST = element['temp']
+#         T = ST - temp_f
+#         if(T<0):
+#             T = T*(-1)
+#         if(T<Min):
+#             Min = T
+#             i = element['name']
+#
+#     return json.dumps(i, default=json_util.default)
+#     # return ()
+#

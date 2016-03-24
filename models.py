@@ -15,3 +15,6 @@ class Clothes(db.Document):
     temp = db.FloatField()
     name = db.StringField()
     part_of_the_body = db.StringField()
+
+class Signs(db.Document):
+    text = db.StringField()
