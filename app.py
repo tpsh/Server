@@ -31,6 +31,13 @@ def index():
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
+@app.route('/csv')
+def csv():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date')
+    template = env.get_template('csv.html')
+    return template.render(mesurements=a)
+
 # @app.route('/pandas')
 # def pandas():
 #     a = Mesurement.query.raw_output()

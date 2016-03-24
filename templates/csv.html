@@ -1,0 +1,12 @@
+Temperature,Light,Wind,Pressure,Voltage,Team,Date
+<br/>
+{% for item in mesurements %}
+{{ item.temp }},
+{{ item.light }},
+{{ item.wind_speed }},
+{{ item.press }},
+{{ item.voltage }},
+{{ item.team }},
+{{ item.date|datetime }}
+<br/>
+{% endfor %}
