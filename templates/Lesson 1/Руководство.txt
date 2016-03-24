@@ -1,0 +1,17 @@
+CSS стили, которые мы прошли на прошлом уроке
+color: black(цвет);
+margin: 10px(размер);
+padding: 10px(размер);
+text-align: center(left, right);
+font-size: 12px;
+background-color: white(цвет);
+border: 1px solid black (2px dotted grey)
+
+Новые CSS стили, которые вам нужны, для верстки  шаблона
+font-family: Arial(Geneva); - меняет семейство шрифтов
+font-weight: bold; - жирный шрифт
+text-decoration: none; - убирает подчеркивание шрифта
+width: 720px(размер); - ширина блока
+height: 100px(размер); - высота блока
+clear: both; - Отменяет обтекание элемента
+float: left; - Выравнивает элемент по левому краю

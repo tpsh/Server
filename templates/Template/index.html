@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/starter-template/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/fullcalendar.css">
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+  </head>
+
+  <body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div id="my_date"></div>
+    </div> 
+    <div class="col-md-4">
+    <p> #ПроПогоду</p>
+    </div>
+    <div class="col-md-4">
+    <p> Включить смс оповещения о погоде.</p>
+     <div class="input-group">
+      <span class="input-group-addon" id="sizing-addon2">Номер телефона</span>
+     <input type="text" class="form-control" placeholder="+ 7 (914) 234-76-64 " aria-describedby="sizing-addon2"> 
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Подключить</button> 
+        </div>
+        </div>
+
+        <div class="input-group">
+       <span class="input-group-addon">
+        <input type="checkbox" aria-label=""> 
+         Согласен с условиями
+      </span>
+      <span class="agreed"></span>
+ </div>
+    </div>
+    <!-- /input-group -->
+  </div>
+
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-md-3">
+        <h1>+18°C</h1>
+<h3>ветер 5м/с</h3>
+<h3>влажность 56%</h3>
+<h3>давление 760мм рт.ст.</h3>
+         </div>
+         <div class="col-md-4">
+         <img src="img/weather.jpg"><p>Наденьте головной убор</p>
+     </div>
+     <div class="col-md-4">
+        <h1>Если в этот день тепло,   
+то и весна будет теплой.</h1>
+    </div>
+</div>
+<div class="cal_wrap"><div id="calendar_day"></div></div>
+
+<div class="row">
+    <div class = "col-md-offset-8">
+<button class="btn btn-default" type="submit">Погода на месяц</button>
+</div>
+</div>
+<div class="row my-footer">
+    <div class="col-md-6 game">
+        <h1>Игра Дерека</h1>
+    </div>
+    <div class="col-md-3 col-md-offset-2 game">
+        <h1>Ссылка и картинка на графики погоды</h1>
+    </div>
+</div>
+
+
+<!-- JAVASCRIPT -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar.js"></script>
+    <script type="text/javascript" src='js/lang-fullcalendar.js'></script>
+    <script type="text/javascript" src="js/script.js"> </script>
+
+
+</body></html>
