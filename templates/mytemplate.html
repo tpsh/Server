@@ -1,13 +1,44 @@
-<ul>
+<table>
+  <tr>
+    <th>
+      N
+    </th>
+    <th>
+      Temperature
+    </th>
+    <th>
+      Light
+    </th>
+    <th>
+      Wind Speed
+    </th>
+    <th>
+      Pressure
+    </th>
+    <th>
+      Voltage
+    </th>
+    <th>
+      Team number
+    </th>
+    <th>
+      Date
+    </th>
+  </tr>
   {% for item in mesurements %}
-      <li>
-         Temperature: {{ item.temp }} <br />
-         Light: {{ item.light }} <br />
-         Wind Speed: {{ item.wind_speed }} <br />
-         Pressure: {{ item.press }} <br />
-         Voltage: {{ item.voltage }} <br />
-         Date: {{ item.date }} <br />
-         Team number: {{ item.team }} <br />
-      </li>
-  {% endfor %}
+  <tr>
+    <td>{{loop.index}} </td>
+    <td>{{ item.temp }}  </td>
+    <td>{{ item.light }} </td>
+    <td> {{ item.wind_speed }} </td>
+    <td> {{ item.press }} </td>
+    <td> {{ item.voltage }} </td>
+    <td> {{ item.team }} </td>
+    <td> {{ item.date }} </td>
+  </tr>
+
+
+    {% endfor %}
+</table>
+<ul>
 </ul>

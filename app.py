@@ -2,20 +2,28 @@ from flask import Flask
 from flask import request
 from datetime import datetime
 import json
+# from babel import babel
 # import pandas as pd
 # from bson import json_util
 from models import Mesurement
 
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
+def format_datetime(value, format='medium'):
+    if format == 'full':
+        format="EEEE, d. MMMM y 'at' HH:mm"
+    elif format == 'medium':
+        format="EE dd.MM.y HH:mm"
+    return babel.dates.format_datetime(value, format)
 
+env.filters['datetime'] = format_datetime
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
     a = Mesurement.query.raw_output()
-    a = a.all()
+    a = a.descending('date').limit(20)
     template = env.get_template('mytemplate.html')
     return template.render(mesurements=a)
 
