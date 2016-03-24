@@ -14,7 +14,7 @@ env = Environment(loader=PackageLoader(__name__, 'templates'))
 def index():
     # a = Mesurement.query.raw_output()
     # a = a.filter(Mesurement.temp > 3).all()
-    template = env.get_template('index.html')
+    template = env.get_template('MyTemplate.html')
     return template.render()
 
 @app.route('/create')
