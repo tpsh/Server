@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.mongoalchemy import MongoAlchemy
+import os
 app = Flask(__name__)
 
 MONGO_URL = os.environ.get('MONGOLAB_URI')
