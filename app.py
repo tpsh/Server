@@ -320,7 +320,7 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) #app.run()
+    app.run() #app.run() debug=True
 
 # @app.route('/get_all_readings')
 # def get_all_testimony():
