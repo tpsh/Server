@@ -24,6 +24,13 @@ def send_img(path):
 def send_src(path):
     return send_from_directory('templates/Template/src', path)
 
+@app.route('/team/<path:path>')
+def send_MS(path):
+    b = Mesurement.query.raw_output()
+    b = b.descending(Mesurement.date).all()
+    b = b.filter(Mesurement.team == path).limit(1).one()
+    return send_from_directory('templates/team')
+
 
 @app.route('/')
 def index():
@@ -40,7 +47,7 @@ def index():
     return template.render(Z=Z, mesurement = a)
     # return json.dumps(N, default=json_util.default)
 
-    
+
  #  Функция, необходимая для выборки одежды из базы данных одежды
     # cloth = Clothes.query.raw_output()
     # cloth = cloth.all()

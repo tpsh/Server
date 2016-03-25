@@ -10,7 +10,7 @@ class Mesurement(db.Document):
     wind_speed = db.FloatField()
     pressure = db.FloatField()
     date = db.DateTimeField()
-    team = db.IntegerFiled
+    team = db.FloatField()
 
 class Clothes(db.Document):
     temp = db.FloatField()
