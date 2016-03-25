@@ -28,6 +28,19 @@ def send_src(path):
 @app.route('/')
 def index():
 
+    a = Mesurement.query.raw_output()
+    a = a.descending(Mesurement.date).limit(1).one()
+    print('a = ', a)
+    if(a['temp']<0):
+        Z ='-'
+    else:
+        Z='+'
+
+    template = env.get_template('Template/index.html')
+    return template.render(Z=Z, mesurement = a)
+    # return json.dumps(N, default=json_util.default)
+
+    
  #  Функция, необходимая для выборки одежды из базы данных одежды
     # cloth = Clothes.query.raw_output()
     # cloth = cloth.all()
@@ -53,17 +66,8 @@ def index():
     #             N[3] = element['name']
 
 
-    a = Mesurement.query.raw_output()
-    a = a.descending(Mesurement.date).limit(1).one()
-    print('a = ', a)
-    if(a['temp']<0):
-        Z ='-'
-    else:
-        Z='+'
 
-    template = env.get_template('Template/index.html')
-    return template.render(Z=Z, mesurement = a)
-    # return json.dumps(N, default=json_util.default)
+
 
 @app.route('/create')
 def create():
@@ -77,7 +81,7 @@ def create_cloths():
     clothes.save()
     return 'Сlothing created'
 
-@app.route('/get_all_readings)
+@app.route('/get_all_readings')
 def get_all_testimony():
 
     readings = Mesurement.query.raw_output()
