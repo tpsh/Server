@@ -9,13 +9,16 @@ class Mesurement(db.Document):
     illumination = db.FloatField()
     wind_speed = db.FloatField()
     pressure = db.FloatField()
-    date = db.DateTimeField()
-    team = db.FloatField()
+    data = db.DateTimeField()
+    team = db.IntField()
 
 class Clothes(db.Document):
     temp = db.FloatField()
     name = db.StringField()
     part_of_the_body = db.StringField()
+    
+class Signs(db.Document):
+    text = db.StringField()
 
 # class Analyzed(db.Document):
 #     tempAV = db.FloatField()
@@ -23,6 +26,3 @@ class Clothes(db.Document):
 #     wind_speedAV = db.FloatField()
 #     pressureAV = db.FloatField()
 #     dateAV = db.DateTimeField()
-
-class Signs(db.Document):
-    text = db.StringField()

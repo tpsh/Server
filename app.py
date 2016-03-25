@@ -36,16 +36,19 @@ def send_MS(team_id):
 def index():
 
     a = Mesurement.query.raw_output()
-    a = a.descending(Mesurement.date).limit(1).one()
-    print('a = ', a)
-    if(a['temp']<0):
-        Z ='-'
-    else:
-        Z='+'
-
+    a = a.descending(Mesurement.data).limit(3)
+    z = a
+    Average = FindMean(z)
     template = env.get_template('Template/index.html')
-    return template.render(Z=Z, mesurement = a)
-    # return json.dumps(N, default=json_util.default)
+    return template.render(mesurement = Average)
+    
+    # if(Average['temp']<0):
+    #     S ='-'
+    # else:
+    #     S ='+'
+    # print('a = ', a)
+    # return template.render(Z=S, mesurement = Average)
+    # return json.dumps("", default=json_util.default)
 
 @app.route('/map')
 def map():
@@ -107,7 +110,7 @@ if __name__ == '__main__':
 #     cloth = Clothes.query.raw_output()
 #     cloth = cloth.all()
 #     Date = Mesurement.query.raw_output()
-#     Date = Date.ascending(Mesurement.date).limit(1).one()
+#     Date = Date.descending(Mesurement.date).limit(1).one()
 #     # print(Date, Date['temp'])
 #
 #     k=0.5
