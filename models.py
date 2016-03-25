@@ -2,8 +2,6 @@ from flask import Flask
 from flask.ext.mongoalchemy import MongoAlchemy
 app = Flask(__name__)
 
-db = MongoAlchemy(app)
-
 MONGO_URL = os.environ.get('MONGOLAB_URI')
 print("MONGOLAB_URI", MONGO_URL)
 if MONGO_URL:
@@ -16,6 +14,7 @@ else:
   # Not on an app with the MongoHQ add-on, do some localhost action
   app.config['MONGOALCHEMY_DATABASE'] = 'library'
 
+db = MongoAlchemy(app)
 
 class Mesurement(db.Document):
     temp = db.FloatField()
