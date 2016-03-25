@@ -23,14 +23,13 @@ def send_img(path):
 @app.route('/src/<path:path>')
 def send_src(path):
     return send_from_directory('templates/Template/src', path)
-
-@app.route('/team/<path:path>')
-def send_MS(path):
+@app.route('/team/<team_id>')
+def send_MS(team_id):
     b = Mesurement.query.raw_output()
-    b = b.descending(Mesurement.date).all()
-    b = b.filter(Mesurement.team == path).limit(1).one()
-    return send_from_directory('templates/team')
-
+    b = b.filter(Mesurement.team == int(team_id)).all()
+    template = env.get_template('team.html')
+    return template.render(data=b, team=team_id)
+    # return team_id
 
 @app.route('/')
 def index():
@@ -47,34 +46,10 @@ def index():
     return template.render(Z=Z, mesurement = a)
     # return json.dumps(N, default=json_util.default)
 
-
- #  Функция, необходимая для выборки одежды из базы данных одежды
-    # cloth = Clothes.query.raw_output()
-    # cloth = cloth.all()
-    # Date = Mesurement.query.raw_output()
-    # Date = Date.descending(Mesurement.date).limit(1).one()
-    # k=0.1
-    # N=['','','','']
-    # temp_f = Date['temp'] - (Date['wind_speed']*k)
-    # Min = 100000
-    # for element in cloth:
-    #     T = element['temp'] - temp_f
-    #     if(T<0):
-    #         T = T*(-1)
-    #     if(T<=Min):
-    #         Min = T
-    #         if(element['part_of_the_body'] == "body"):
-    #             N[1] = element['name']
-    #         if(element['part_of_the_body'] == "head"):
-    #             N[0] = element['name']
-    #         if(element['part_of_the_body'] == "legs"):
-    #             N[2] = element['name']
-    #         if(element['part_of_the_body'] == "Feet"):
-    #             N[3] = element['name']
-
-
-
-
+@app.route('/map')
+def map():
+    template = env.get_template('map.html')
+    return template.render()
 
 @app.route('/create')
 def create():
@@ -114,8 +89,6 @@ if __name__ == '__main__':
     app.run(debug=True) #app.run()
 
 
-# создать четыре типа одежды: головной убор, торс, ноги, стопы на три сезона: -30, -15, +20
-
 
 # @app.route('/get')
 # def get():
@@ -153,3 +126,31 @@ if __name__ == '__main__':
 #     return json.dumps(i, default=json_util.default)
 #     # return ()
 #
+
+
+
+
+
+ #  Функция, необходимая для выборки одежды из базы данных одежды
+    # cloth = Clothes.query.raw_output()
+    # cloth = cloth.all()
+    # Date = Mesurement.query.raw_output()
+    # Date = Date.descending(Mesurement.date).limit(1).one()
+    # k=0.1
+    # N=['','','','']
+    # temp_f = Date['temp'] - (Date['wind_speed']*k)
+    # Min = 100000
+    # for element in cloth:
+    #     T = element['temp'] - temp_f
+    #     if(T<0):
+    #         T = T*(-1)
+    #     if(T<=Min):
+    #         Min = T
+    #         if(element['part_of_the_body'] == "body"):
+    #             N[1] = element['name']
+    #         if(element['part_of_the_body'] == "head"):
+    #             N[0] = element['name']
+    #         if(element['part_of_the_body'] == "legs"):
+    #             N[2] = element['name']
+    #         if(element['part_of_the_body'] == "Feet"):
+    #             N[3] = element['name']
