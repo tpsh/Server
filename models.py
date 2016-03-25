@@ -19,8 +19,8 @@ class Clothes(db.Document):
 
 class Signs(db.Document):
     text = db.StringField()
-    dateS = db.DateTimeField()
-    dateF = db.DateTimeField()
+    date_s = db.DateTimeField()
+    date_e = db.DateTimeField()
 
 # class Analyzed(db.Document):
 #     tempAV = db.FloatField()
