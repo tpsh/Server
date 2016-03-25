@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Markers as links</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoidGltb3BoZXltIiwiYSI6ImNpbTc4ZnZpdjAwMDZ4NG05d3RzbzF1N24ifQ.pli5gBJXC0A-VRhdPESUYQ';
+var map = L.mapbox.map('map', 'mapbox.streets')
+  .setView([43.207618, 132.16039], 16);
+
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+// The GeoJSON representing the two point features
+var geojson = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {
+            title: 'OGON',
+            'marker-color': '#f86767',
+            'marker-size': 'large',
+            'marker-symbol': 'star',
+            url: 'http://localhost:5000/station/0'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [132.15609, 43.206258]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'ПОВАР',
+            'marker-color': '#f86722',
+            'marker-size': 'large',
+            'marker-symbol': 'star',
+            url: 'http://localhost:5000/station/1'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [132.15509, 43.206258]
+        }
+    }
+  ]
+};
+
+// Pass features and a custom factory function to the map
+myLayer.setGeoJSON(geojson);
+myLayer.on('click', function(e) {
+    window.open(e.layer.feature.properties.url);
+});
+</script>
+</body>
+</html>

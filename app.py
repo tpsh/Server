@@ -1,67 +1,144 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, send_from_directory
+from models import Mesurement, Clothes
 from datetime import datetime
-from dateutil.parser import parse
+
 import json
-from babel import dates
-# import pandas as pd
-# from bson import json_util
-from models import Mesurement
+from bson import json_util
+app = Flask(__name__)
 
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
-def format_datetime(value, format='medium'):
-    print(value)
-    value = parse(str(value))
+app.config['STATIC_FOLDER'] = 'templates'
 
-    if format == 'full':
-        format="EEEE, d. MMMM y 'at' HH:mm"
-    elif format == 'medium':
-        format="EE dd.MM.y HH:mm"
-    return dates.format_datetime(value, format, tzinfo=dates.get_timezone('Asia/Vladivostok'))
 
-env.filters['datetime'] = format_datetime
-app = Flask(__name__)
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('templates/Template/css', path)
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('templates/Template/js', path)
+@app.route('/img/<path:path>')
+def send_img(path):
+    return send_from_directory('templates/Template/img', path)
+@app.route('/src/<path:path>')
+def send_src(path):
+    return send_from_directory('templates/Template/src', path)
 
 
 @app.route('/')
 def index():
-    a = Mesurement.query.raw_output()
-    a = a.descending('date').limit(20)
-    template = env.get_template('mytemplate.html')
-    return template.render(mesurements=a)
 
-@app.route('/csv')
-def csv():
-    a = Mesurement.query.raw_output()
-    a = a.descending('date')
-    template = env.get_template('csv.html')
-    return template.render(mesurements=a)
+ #  Функция, необходимая для выборки одежды из базы данных одежды
+    # cloth = Clothes.query.raw_output()
+    # cloth = cloth.all()
+    # Date = Mesurement.query.raw_output()
+    # Date = Date.descending(Mesurement.date).limit(1).one()
+    # k=0.1
+    # N=['','','','']
+    # temp_f = Date['temp'] - (Date['wind_speed']*k)
+    # Min = 100000
+    # for element in cloth:
+    #     T = element['temp'] - temp_f
+    #     if(T<0):
+    #         T = T*(-1)
+    #     if(T<=Min):
+    #         Min = T
+    #         if(element['part_of_the_body'] == "body"):
+    #             N[1] = element['name']
+    #         if(element['part_of_the_body'] == "head"):
+    #             N[0] = element['name']
+    #         if(element['part_of_the_body'] == "legs"):
+    #             N[2] = element['name']
+    #         if(element['part_of_the_body'] == "Feet"):
+    #             N[3] = element['name']
 
-# @app.route('/pandas')
-# def pandas():
-#     a = Mesurement.query.raw_output()
-#     a = a.all()
-#     df = pd.DataFrame(list(a))
-#     print(df.head())
-#     template = env.get_template('mytemplate.html')
-#     return template.render(mesurements=a)
+
+    a = Mesurement.query.raw_output()
+    a = a.descending(Mesurement.date).limit(1).one()
+    print('a = ', a)
+    if(a['temp']<0):
+        Z ='-'
+    else:
+        Z='+'
+
+    template = env.get_template('Template/index.html')
+    return template.render(Z=Z, mesurement = a)
+    # return json.dumps(N, default=json_util.default)
+
+@app.route('/create')
+def create():
+    mesuremsent = Mesurement(temp=14, illumination=0.55, wind_speed=30, pressure=7)
+    mesuremsent.save()
+    return 'created'
+
+@app.route('/create_cloths')
+def create_cloths():
+    clothes = Clothes(name="Sandali", temp = 20, part_of_the_body = "Feet")
+    clothes.save()
+    return 'Сlothing created'
+
+@app.route('/get_all_readings)
+def get_all_testimony():
+
+    readings = Mesurement.query.raw_output()
+    readings = readings.all()
 
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    data_srt = request.data.decode("utf-8")
-    data = json.loads(data_srt)
-    mesurement = Mesurement(temp=data['temp'],
-                            light=data['light'],
-                            wind_speed=data['wind'],
-                            press=data['press'],
-                            voltage=data['voltage'],
-                            team=data['team'],
-                            date=datetime.today()
-                            )
-    mesurement.save()
-    return data_srt
+
+    data = json.loads(request.data.decode("utf-8"))
+    for element in data:
+        mesuremsent = Mesurement(temp = element['temp'],
+                                 illumination = element['illumination'],
+                                 wind_speed = element['wind_speed'],
+                                 pressure = element['pressure'],
+                                 date = datetime.today())
+        mesuremsent.save()
+
+    return "saved"
+
 
 if __name__ == '__main__':
     app.run(debug=True) #app.run()
+
+
+# создать четыре типа одежды: головной убор, торс, ноги, стопы на три сезона: -30, -15, +20
+
+
+# @app.route('/get')
+# def get():
+#     data = Mesurement.query.raw_output()
+#     data = data.filter(Mesurement.temp > 0).limit(1).one()
+#
+#     return json.dumps(data, default=json_util.default)
+
+
+
+
+# @app.route('/get_cloths')
+# def get_cloths():
+#
+#     cloth = Clothes.query.raw_output()
+#     cloth = cloth.all()
+#     Date = Mesurement.query.raw_output()
+#     Date = Date.ascending(Mesurement.date).limit(1).one()
+#     # print(Date, Date['temp'])
+#
+#     k=0.5
+#     i=''
+#     temp_f = Date['temp'] - (Date['wind_speed']*k)
+#     Min = 100000
+#     for element in cloth:
+#         # print(element)
+#         ST = element['temp']
+#         T = ST - temp_f
+#         if(T<0):
+#             T = T*(-1)
+#         if(T<Min):
+#             Min = T
+#             i = element['name']
+#
+#     return json.dumps(i, default=json_util.default)
+#     # return ()
+#

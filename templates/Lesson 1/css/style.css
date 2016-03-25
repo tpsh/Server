@@ -1,0 +1,36 @@
+#blue {background-color: #6495ED;
+}
+a {color: orange} 
+h1 {padding-top: 20px; margin-top: 0px} 
+h1 {color: white} 
+div{ background-color: blue;
+	height: 100px;}
+a {margin-top: 50px; margin:25px;
+	float: left;}
+div.blue_small {background-color: blue;
+		height: 100px;
+		margin: 25px; 
+		float: left} 
+#white {color: white;
+		background-color: white;}
+div.blue_small {padding: 21.2px;
+	text-align: center;} 
+div.p1 > p {margin-top: 10%;
+			color: white;}
+div.p > p {margin-top: 10%}
+div.p1 {text-align: center;}
+div.blue_small > p {margin-top: 30%;}
+#pops {background-color: white;} 
+div.clear{
+	background-color: white;
+	clear: both;}
+div.first_left {margin-left: 22%;}
+div.p {	margin-left: 22.4%;
+	margin-right: 20px;
+	height: 50px;  
+	float: left;
+	color: white}
+div.p1 {height: 50px; 
+	margin-right: 20px; 
+	float: left;
+	color: white;} 
