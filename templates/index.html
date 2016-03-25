@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/starter-template/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Платформа "Океан метео"</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <link rel="stylesheet" href="css/fullcalendar.css">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+  </head>
+
+  <body>
+<div class="main_wrapper container"> <!-- Header -->
+  <div class="row background_white">
+    <div class="col-md-3">
+    <a href="http://okean.org/"><img src="img/Okean.png" alt="ВДЦ Океан" class="img_okean"></a>
+  </div>
+    <div class="col-md-3">
+    <h2 class="h_no_margin main_head">#ПроПогоду</h2>
+    <h5 class="second_head">Прогноз погоды для <a href="http://okean.org/">ВДЦ "ОКЕАН"</a></h5>
+    </div>
+      <div class="col-md-6">
+      <table  class="navbar"> <!-- Navigation bar -->
+        <tr>
+            <td>
+              <span>
+              Прогноз погоды
+             </span>
+            </td>
+            <td>
+            <a href="graphics.html">Графики погоды</a>
+            </td>
+            <td>
+            <a href="#game">Детская игра про погоду</a>
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#week">на неделю</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="table.html">на месяц</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+<div class="container   background_sea"> <!--Main container-->
+<div class="wrapper_sea">
+<div class="row ">
+    <div class="col-md-4">
+      <div class ="main_widget">
+        <h5 class="inline">Сегодня&nbsp;<span id="my_date"></span></h5>
+<h1>+{{mesurement.temp}}&nbsp;<img src="img/weather/big_cloud.png" alt="cloud" class="big_icon"></h1>
+<p>Скорость ветра <span>{{mesurement.wind_speed}} м/с </span></p>
+<!-- <p>влажность <span>{{mesurement.pressure}}%</span></p> -->
+<p>давление <span>{{mesurement.press}}мм рт.ст.</span></p>
+<!-- <p>освященность <span>99%</span></p> -->
+      </div>
+         </div>
+         <div class="col-md-4">
+          <div class="block_weather light_blue">
+            <table class="table main_weather">
+              <tr>
+              <td></td>
+              <td></td>
+              <td>&deg;C</td>
+              <td class="table_wind">м/c</td>
+              </tr>
+
+              <tr>
+              <td>Ночь</td>
+              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td>+7</td>
+              <td class="table_wind">5</td>
+              </tr>
+
+              <tr>
+              <td>Утро</td>
+              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td>+11</td>
+              <td class="table_wind">7</td>
+              </tr>
+
+              <tr>
+              <td>День</td>
+              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td>+16</td>
+              <td class="table_wind">8</td>
+              </tr>
+
+              <tr>
+              <td>Вечер</td>
+              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td>+14</td>
+              <td class="table_wind">7</td>
+              </tr>
+            </table>
+          </div>
+          <div class="light_blue block_advice">
+            <h4 class="text_advice">Совет дня</h4>
+            <p class="text_advice">Рекомендуем надеть  головной убор (шляпу, шапка) </p>
+          </div>
+     </div>
+     <div class="col-md-2 light_blue block_signs">
+        <h4 class="header_signs">Народная примета на сегодня</h4>
+        <p class="text_signs">Если в этот день тепло,
+то и весна будет теплой.</p>
+    </div>
+</div>
+</div>
+</div>
+<a name="week"></a>
+<div class="cal_wrap"><div id="calendar_day"></div></div> <!--- JS-script to create calendar -->
+
+<div class="row">
+    <div class = "col-md-12">
+      <div class = "full_view">
+        <a href="table">Посмотреть прогноз погоды на месяц</a>
+      </div>
+</div>
+</div>
+<div class="row my-footer">
+    <div class="col-md-9">
+      <div class ="light_blue game">
+
+<div class = "wrapper_game">
+<div id="option1" class="group">
+  <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/103016078/?autostart=false" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div id="option2" class="group">
+  <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/102469141/?autostart=false" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div id="option3" class="group">
+      <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/102732091/?autostart=false" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+<div id="option4" class="group">
+      <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/102588577/?autostart=false" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<div id="option5" class="group">
+      <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/102889930/?autostart=false" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<div id="option6" class="group">
+      <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/102740490/?autostart=false" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+
+</div>
+
+<div class ="dropdown_wrapper">
+<a name="game"></a>
+<h4>Игры для детей о погоде</h4>
+<select id="selectMe" class="dropdown">
+  <option value="option1">Первая игра</option>
+  <option value="option2">Вторая игра</option>
+  <option value="option3">Третья игра</option>
+  <option value="option4">Четвертая игра</option>
+  <option value="option5">Пятая игра</option>
+  <option value="option6">Шестая игра</option>
+</select>
+
+
+</div>
+
+
+
+      <!--  <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/58368102/?autostart=false" frameborder="0" allowfullscreen></iframe> -->
+      </div>
+    </div>
+    <div class="col-md-3 link_grap_wrapper">
+      <a href="/map">
+      <div class="link_grap">
+        <p>Интересные<br> графики<br>о погоде</p>
+      </div>
+        </a>
+    </div>
+</div>
+<div class="row">
+<div class="copyright">
+  <p>По вопросам технической поддержки <br> обращайтесь по этому адресу <a href="table.html">support@pogodaokean.ru</a></p>
+</div>
+</div>
+</div>
+
+
+<!-- JAVASCRIPT -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar.js"></script>
+    <script type="text/javascript" src='js/lang-fullcalendar.js'></script>
+    <script type="text/javascript" src="js/script.js"> </script>
+
+
+</body>
+
+</html>

@@ -14,16 +14,16 @@ app.config['STATIC_FOLDER'] = 'templates'
 
 @app.route('/css/<path:path>')
 def send_css(path):
-    return send_from_directory('templates/Template/css', path)
+    return send_from_directory('templates/css', path)
 @app.route('/js/<path:path>')
 def send_js(path):
-    return send_from_directory('templates/Template/js', path)
+    return send_from_directory('templates/js', path)
 @app.route('/img/<path:path>')
 def send_img(path):
-    return send_from_directory('templates/Template/img', path)
+    return send_from_directory('templates/img', path)
 @app.route('/src/<path:path>')
 def send_src(path):
-    return send_from_directory('templates/Template/src', path)
+    return send_from_directory('templates/src', path)
 @app.route('/team/<team_id>')
 def send_MS(team_id):
     b = Mesurement.query.raw_output()
@@ -33,9 +33,8 @@ def send_MS(team_id):
 
 @app.route('/')
 def index():
-
     a = Mesurement.query.raw_output()
-    a = a.descending(Mesurement.data).limit(3)
+    a = a.descending(Mesurement.date).limit(3)
     z = a
     Average = FindMean(z)
 
@@ -48,9 +47,31 @@ def index():
             if((element['date_s'].day<=datetime.today().day) and (element['date_e'].day>=datetime.today().day)):
                 ok.append(element)
     # sign = b.['text']
-    # template = env.get_template('Template/index.html')
-    return json.dumps(ok, default=json_util.default)
-    #return template.render(mesurement = Average, sign = sign)
+    template = env.get_template('index.html')
+    # return json.dumps(ok, default=json_util.default)
+    return template.render(mesurement = Average, sign = {}) #sign
+
+@app.route('/top')
+def top():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date').limit(20)
+    template = env.get_template('top.html')
+    return template.render(mesurements=a)
+
+
+@app.route('/csv')
+def csv():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date')
+    template = env.get_template('csv.html')
+    return template.render(mesurements=a)
+
+@app.route('/table')
+def table():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date')
+    template = env.get_template('table.html')
+    return template.render(mesurements=a)
 
 @app.route('/create_signs')
 def create_signs():
@@ -283,16 +304,19 @@ def map():
 @app.route('/submit', methods=['POST'])
 def submit():
 
-    data = json.loads(request.data.decode("utf-8"))
-    for element in data:
-        mesuremsent = Mesurement(temp = element['temp'],
-                                 illumination = element['illumination'],
-                                 wind_speed = element['wind_speed'],
-                                 pressure = element['pressure'],
-                                 date = datetime.today())
-        mesuremsent.save()
+    data_srt = request.data.decode("utf-8")
+    data = json.loads(data_srt)
 
-    return "saved"
+    mesuremsent = Mesurement(temp = element['temp'],
+                             light = element['light'],
+                             wind_speed = element['wind'],
+                             press = element['press'],
+                             voltage=data['voltage'],
+                             team=data['team'],
+                             date = datetime.today())
+    mesuremsent.save()
+
+    return data_srt
 
 
 if __name__ == '__main__':
