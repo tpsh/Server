@@ -39,9 +39,13 @@ def index():
     a = a.descending(Mesurement.data).limit(3)
     z = a
     Average = FindMean(z)
+
+    b = Signs.query.raw_output()
+    b = b.filter( (Sings.dateS>=datetime.today()) and (Signs.dateF<=datetime.today()) ).limit(1).one()
+    sign = b['text']
     template = env.get_template('Template/index.html')
-    return template.render(mesurement = Average)
-    
+    return template.render(mesurement = Average, sign = sign)
+
     # if(Average['temp']<0):
     #     S ='-'
     # else:
