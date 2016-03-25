@@ -41,13 +41,15 @@ def index():
 
     b = Signs.query.raw_output()
     b = b.all()
+    ok = []
     print(int(datetime.today().day))
     for element in b:
-        if((element['date_s']<=datetime.today().month) and (element['date_e']>=datetime.today().month)):
-            if((element['date_s']<=datetime.today().month) and (element['date_e']>=datetime.today().month))
+        if((element['date_s'].month<=datetime.today().month) and (element['date_e'].month>=datetime.today().month)):
+            if((element['date_s'].day<=datetime.today().day) and (element['date_e'].day>=datetime.today().day)):
+                ok.append(element)
     # sign = b.['text']
     # template = env.get_template('Template/index.html')
-    return json.dumps(b, default=json_util.default)
+    return json.dumps(ok, default=json_util.default)
     #return template.render(mesurement = Average, sign = sign)
 
 @app.route('/create_signs')
