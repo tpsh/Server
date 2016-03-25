@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory
 from models import Mesurement, Clothes
 from datetime import datetime
+from Analyze import FindMean
 
 import json
 from bson import json_util
