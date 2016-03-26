@@ -344,14 +344,15 @@ def submit():
 
     data_srt = request.data.decode("utf-8")
     data = json.loads(data_srt)
-
-    mesuremsent = Mesurement(temp = element['temp'],
-                             light = element['light'],
-                             wind_speed = element['wind'],
-                             press = element['press'],
-                             voltage=data['voltage'],
-                             team=data['team'],
-                             date = datetime.today())
+    
+    mesurement = Mesurement(temp=data['temp'],
+        light=data['light'],
+        wind_speed=data['wind'],
+        press=data['press'],
+        voltage=data['voltage'],
+        team=data['team'],
+        date=datetime.today()
+        )
     mesuremsent.save()
 
     return data_srt
