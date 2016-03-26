@@ -23,6 +23,7 @@ class Mesurement(db.Document):
     wind_speed = db.FloatField()
     press = db.FloatField()
     date = db.DateTimeField()
+    voltage = db.FloatField()
     team = db.IntField()
 
 class Clothes(db.Document):

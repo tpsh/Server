@@ -344,7 +344,7 @@ def submit():
 
     data_srt = request.data.decode("utf-8")
     data = json.loads(data_srt)
-    
+
     mesurement = Mesurement(temp=data['temp'],
         light=data['light'],
         wind_speed=data['wind'],
@@ -353,7 +353,7 @@ def submit():
         team=data['team'],
         date=datetime.today()
         )
-    mesuremsent.save()
+    mesurement.save()
 
     return data_srt
 
