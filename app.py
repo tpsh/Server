@@ -4,11 +4,26 @@ from datetime import datetime
 from Analyze import FindMean
 
 import json
+from dateutil.parser import parse
+from babel import dates
 from bson import json_util
 app = Flask(__name__)
 
+
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
+
+def format_datetime(value, format='medium'):
+    print(value)
+    value = parse(str(value))
+
+    if format == 'full':
+        format="EEEE, d. MMMM y 'at' HH:mm"
+    elif format == 'medium':
+        format="EE dd.MM.y HH:mm"
+    return dates.format_datetime(value, format, tzinfo=dates.get_timezone('Asia/Vladivostok'))
+
+env.filters['datetime'] = format_datetime
 app.config['STATIC_FOLDER'] = 'templates'
 env.filters['jsonify'] = json.dumps
 
