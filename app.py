@@ -6,6 +6,7 @@ from Analyze import FindMean
 import json
 from dateutil.parser import parse
 from babel import dates
+import pandas
 from bson import json_util
 app = Flask(__name__)
 
@@ -39,12 +40,19 @@ def send_img(path):
 @app.route('/src/<path:path>')
 def send_src(path):
     return send_from_directory('templates/src', path)
+
 @app.route('/team/<team_id>')
 def send_MS(team_id):
     b = Mesurement.query.raw_output()
     b = b.filter(Mesurement.team == int(team_id)).all()
+    meteo_n = pandas.DataFrame(b)
+    print(meteo_n.head())
+    date_n = meteo_n['date']
+    # for i in range(len(meteo_n['date'])):
+    #     date_n[i] = str(date_n[i])[-6:-1]
+
     template = env.get_template('team.html')
-    return template.render(data=b, team=team_id)
+    return template.render(data=b, team=team_id, date_n = date_n, temperature_y = meteo_n['temp'])
 
 @app.route('/')
 def index():
