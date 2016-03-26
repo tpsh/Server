@@ -1,17 +1,23 @@
 Team {{team}}
 
-<div id="my-graph">
+<div id="wind-graph">
 
 </div>
 
 <!-- Latest compiled and minified plotly.js JavaScript -->
-<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="/js/plotly.js"></script>
 <script>
 
 
-  var data = [{"y": {{temperature_y|jsonify}},
-  "x":[" Thu 24.03.2016 14:29 "," Thu 24.03.2016 14:27 "," Thu 24.03.2016 14:25 "," Thu 24.03.2016 14:23 "," Thu 24.03.2016 14:21 "," Thu 24.03.2016 14:19 "," Thu 24.03.2016 14:16 "," Thu 24.03.2016 14:14 "," Thu 24.03.2016 14:12 "," Thu 24.03.2016 14:10 "," Thu 24.03.2016 14:08 "," Thu 24.03.2016 14:06 "," Thu 24.03.2016 14:04 "," Thu 24.03.2016 14:02 "," Thu 24.03.2016 13:59 "," Thu 24.03.2016 13:57 "," Thu 24.03.2016 13:55 "," Thu 24.03.2016 13:53 "," Thu 24.03.2016 13:51 "," Thu 24.03.2016 12:37 "," Thu 24.03.2016 12:35 "," Thu 24.03.2016 12:33 "," Thu 24.03.2016 12:31 "," Thu 24.03.2016 12:27 "," Thu 24.03.2016 12:24 "," Thu 24.03.2016 12:12 "," Thu 24.03.2016 12:10 "," Thu 24.03.2016 12:07 "," Thu 24.03.2016 12:05 "," Thu 24.03.2016 12:03 "," Thu 24.03.2016 12:01 "," Thu 24.03.2016 12:00 "," Thu 24.03.2016 11:55 "," Thu 24.03.2016 11:55 "," Thu 24.03.2016 11:53 "," Thu 24.03.2016 11:14 "," Thu 24.03.2016 11:07 "," Thu 24.03.2016 11:03 "," Thu 24.03.2016 11:01 "," Thu 24.03.2016 11:00 "," Thu 24.03.2016 10:58 "," Thu 24.03.2016 10:57 "," Thu 24.03.2016 10:55 "," Thu 24.03.2016 10:53 "," Thu 24.03.2016 10:45 "," Thu 24.03.2016 10:44 "," Thu 24.03.2016 10:42 "," Thu 24.03.2016 10:41 "],"type":"scatter","name":"Wind Speed","uid":"3216c3"}];
-  var layout = {"autosize":true,"yaxis":{"range":[-3.0114765241166843,32.73879618435725],"type":"linear","autorange":false,"title":"Wind Speed, metres per seconds"},"title":"Wind Speed","height":570,"width":1040,"xaxis":{"range":[-1.5388213557997368,47.796554981894296],"type":"category","autorange":false}};
+  var wind_data = [{"y": {{wind_y|jsonify}}, "x": {{date_n|jsonify}},
+                          "type":"scatter","name":"Wind Speed","uid":"3216c3"}];
+  var wind_layout = {
+      "autosize":true,
+      "yaxis":{"range":[-3.0114765241166843,32.73879618435725],
+      "type":"linear","autorange":false,"title":"Wind Speed, metres per seconds"},
+      "title":"Wind Speed","height":570,"width":1040,
+      "xaxis":{"range":[-1.5388213557997368,47.796554981894296],
+      "type":"category","autorange":false}};
 
-  Plotly.plot('my-graph', data, layout);
+  Plotly.plot('wind-graph', wind_data, wind_layout);
 </script>

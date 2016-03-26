@@ -45,14 +45,40 @@ def send_src(path):
 def send_MS(team_id):
     b = Mesurement.query.raw_output()
     b = b.filter(Mesurement.team == int(team_id)).all()
-    meteo_n = pandas.DataFrame(b)
-    print(meteo_n.head())
-    date_n = meteo_n['date']
-    # for i in range(len(meteo_n['date'])):
-    #     date_n[i] = str(date_n[i])[-6:-1]
 
+    meteo_n = pandas.DataFrame(b)
+    date_n = meteo_n['date']
     template = env.get_template('team.html')
-    return template.render(data=b, team=team_id, date_n = date_n, temperature_y = meteo_n['temp'])
+    date_s = []
+    print(date_n)
+
+    for i in range(len(date_n)):
+        date_s[i] = str(format_datetime(date_n[i]))
+        # print(date_n[i])
+    temp = list(meteo_n['temp'])
+    for i in range(len(temp)):
+        temp[i] = float(temp[i])
+    light = list(meteo_n['light'])
+    for i in range(len(light)):
+        light[i] = float(light[i])
+    wind_speed = list(meteo_n['wind_speed'])
+    for i in range(len(wind_speed)):
+        wind_speed[i] = float(wind_speed[i])
+    press = list(meteo_n['press'])
+    for i in range(len(press)):
+        press[i] = float(press[i])
+    voltage = list(meteo_n['voltage'])
+    for i in range(len(voltage)):
+        voltage[i] = float(voltage[i])
+
+    return template.render(data=b, team=team_id,
+                                   date_n = date_s,
+                                   temperature_y = temp,
+                                   wind_y = wind_speed,
+                                   press_y = press,
+                                   voltage_y = voltage,
+                                   light_y = light,
+                                   )
 
 @app.route('/')
 def index():
