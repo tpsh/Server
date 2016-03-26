@@ -10,7 +10,7 @@ app = Flask(__name__)
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 app.config['STATIC_FOLDER'] = 'templates'
-
+env.filters['jsonify'] = json.dumps
 
 @app.route('/css/<path:path>')
 def send_css(path):
@@ -49,7 +49,30 @@ def index():
     # sign = b.['text']
     template = env.get_template('index.html')
     # return json.dumps(ok, default=json_util.default)
-    return template.render(mesurement = Average, sign = {}) #sign
+    week = [{
+        "temp" : 6,
+        "wind_speed" : 3
+    },{
+        "temp" : 5,
+        "wind_speed" : 10
+    },{
+        "temp" : 7,
+        "wind_speed" : 18
+    },{
+        "temp" : 9,
+        "wind_speed" : 4
+    },{
+        "temp" : 8,
+        "wind_speed" : 1
+    },{
+        "temp" : 7,
+        "wind_speed" : 5
+    },{
+        "temp" : 10,
+        "wind_speed" : 2
+    }]
+    Average['temp'] = int(Average['temp'])
+    return template.render(mesurement = Average, sign = {}, week = week) #sign
 
 @app.route('/top')
 def top():
@@ -320,7 +343,7 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run() #app.run() debug=True
+    app.run(debug=True) #app.run()
 
 # @app.route('/get_all_readings')
 # def get_all_testimony():

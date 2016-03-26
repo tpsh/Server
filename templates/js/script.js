@@ -29,9 +29,10 @@ var date = new Date ;
     });
 
     $('.fc-day').append('<div class= "cal_icon"><img src="img/weather/cloud.png" alt="cloud"></div>');
-    $('.fc-day').append('<div class = "cal_temp"><h2>+40 &deg;C</h2></div>');
-    $('.fc-day').append('<div class = "cal_wind"><p>Скорость ветра: 5 м/c</div>');
-
+    $('.fc-day').each(function(i, el) {
+      $(el).append('<div class = "cal_temp"><h2>' + week[i].temp + ' &deg;C</h2></div>');
+      $(el).append('<div class = "cal_wind"><p>Скорость ветра: ' + week[i].wind_speed + ' м/c</div>');
+    })
 
     $('.group').hide();
     $('#option1').show();
@@ -43,8 +44,8 @@ var date = new Date ;
 
 
    $(document).on('click', 'a[href^=#]', function () {
-        $('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 ); 
+        $('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
         return false;
     });
 
-}); 
+});

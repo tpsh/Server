@@ -24,6 +24,9 @@
     <link href="css/style.css" rel="stylesheet">
 
     <script src="js/ie-emulation-modes-warning.js"></script>
+    <script>
+      var week = {{ week|jsonify  }}
+    </script>
   </head>
 
   <body>
@@ -70,11 +73,17 @@
     <div class="col-md-4">
       <div class ="main_widget">
         <h5 class="inline">Сегодня&nbsp;<span id="my_date"></span></h5>
-<h1>+{{mesurement.temp}}&nbsp;<img src="img/weather/big_cloud.png" alt="cloud" class="big_icon"></h1>
+<h1>+{{mesurement.temp}}&nbsp;<img src="img/weather/Big_cloud.png" alt="cloud" class="big_icon"></h1>
 <p>Скорость ветра <span>{{mesurement.wind_speed}} м/с </span></p>
 <!-- <p>влажность <span>{{mesurement.pressure}}%</span></p> -->
 <p>давление <span>{{mesurement.press}}мм рт.ст.</span></p>
 <!-- <p>освященность <span>99%</span></p> -->
+<!-- <div class="chelovechek">
+   <img src="/img/chelovechek/head_0.png" />
+   <img src="/img/chelovechek/body_0.png" />
+   <img src="/img/chelovechek/lags_0.png" />
+   <img src="/img/chelovechek/foot_0.png" />
+</div> -->
       </div>
          </div>
          <div class="col-md-4">
@@ -89,28 +98,28 @@
 
               <tr>
               <td>Ночь</td>
-              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td><img class="weather_icon" src="/img/weather/cloud.png" alt="cloud"></td>
               <td>+7</td>
               <td class="table_wind">5</td>
               </tr>
 
               <tr>
               <td>Утро</td>
-              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td><img class="weather_icon" src="/img/weather/cloud.png" alt="cloud"></td>
               <td>+11</td>
               <td class="table_wind">7</td>
               </tr>
 
               <tr>
               <td>День</td>
-              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td><img class="weather_icon" src="/img/weather/cloud.png" alt="cloud"></td>
               <td>+16</td>
               <td class="table_wind">8</td>
               </tr>
 
               <tr>
               <td>Вечер</td>
-              <td><img class="weather_icon" src="img/weather/cloud.png" alt="cloud"></td>
+              <td><img class="weather_icon" src="/img/weather/cloud.png" alt="cloud"></td>
               <td>+14</td>
               <td class="table_wind">7</td>
               </tr>

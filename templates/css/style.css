@@ -168,7 +168,7 @@ p.text_advice{
 	color: rgb(0, 0, 0);
 	line-height: 1.2;
 	margin-left: 12px;
-	margin-right: 12px;`   
+	margin-right: 12px;`
 }
 
 
@@ -194,14 +194,14 @@ text-align: center;
 
 div.main_widget > h5 {
 	margin-top: 0px;
-  margin-left: 35px; 
+  margin-left: 35px;
   font-size: 18px;
   color: rgb(255, 255, 255);
   line-height: 1.2;
 }
 
 div.main_widget > p {
-	margin-left: 35px; 
+	margin-left: 35px;
   font-size: 14px;
   color: rgb(255, 255, 255);
   line-height: 1.5;
@@ -229,7 +229,7 @@ div.main_widget > p > span {
 }
 
 h2.main_head {
-  
+
   font-size:32px;
   font-family: "MuseoSansCyrl";
   color: rgb(54, 170, 225);
@@ -286,7 +286,7 @@ div.full_view a {
 	text-decoration: underline;
 	display: inline-block;
 	margin-top: 13px;
-}	
+}
 
 div.copyright p{
 	display: block;
@@ -334,7 +334,7 @@ div.cal_icon {
 
 div.cal_temp{
 	padding-left: 10px;
-	
+
 }
 
 div.cal_wind{
@@ -345,7 +345,7 @@ div.cal_wind{
 
 div.dropdown_wrapper {
 	position: absolute;
-	left: 65%;	
+	left: 65%;
 	top: 5%;
 }
 
@@ -361,4 +361,8 @@ select {
 	text-align: left;
 	width: 200px;
 	height: 25px;
+}
+/* Chelovechek */
+.chelovechek img {
+	
 }
