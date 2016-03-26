@@ -53,7 +53,7 @@ def send_MS(team_id):
     print(date_n)
 
     for i in range(len(date_n)):
-        date_s[i] = str(format_datetime(date_n[i]))
+        date_s.append(str(format_datetime(date_n[i])))
         # print(date_n[i])
     temp = list(meteo_n['temp'])
     for i in range(len(temp)):
@@ -73,7 +73,7 @@ def send_MS(team_id):
 
     return template.render(data=b, team=team_id,
                                    date_n = date_s,
-                                   temperature_y = temp,
+                                   temp_y = temp,
                                    wind_y = wind_speed,
                                    press_y = press,
                                    voltage_y = voltage,
