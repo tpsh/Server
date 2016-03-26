@@ -4,7 +4,7 @@ $(document).ready(function() {
 var date = new Date ;
     monthA = 'января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,ноября,декабря'.split(',');
     if (document.getElementById("my_date")) {
-    document.getElementById("my_date").innerHTML = ('0' + date.getDate()).slice(-2) + ' ' + (monthA[date.getMonth() + 1])  + ' ' + date.getFullYear()
+    document.getElementById("my_date").innerHTML = ('0' + date.getDate()).slice(-2) + ' ' + (monthA[date.getMonth()])  + ' ' + date.getFullYear()
 };
 ;
 
