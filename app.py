@@ -6,6 +6,7 @@ from Analyze import FindMean
 import json
 from dateutil.parser import parse
 from babel import dates
+import pandas
 from bson import json_util
 app = Flask(__name__)
 
@@ -39,12 +40,45 @@ def send_img(path):
 @app.route('/src/<path:path>')
 def send_src(path):
     return send_from_directory('templates/src', path)
+
 @app.route('/team/<team_id>')
 def send_MS(team_id):
     b = Mesurement.query.raw_output()
     b = b.filter(Mesurement.team == int(team_id)).all()
+
+    meteo_n = pandas.DataFrame(b)
+    date_n = meteo_n['date']
     template = env.get_template('team.html')
-    return template.render(data=b, team=team_id)
+    date_s = []
+    print(date_n)
+
+    for i in range(len(date_n)):
+        date_s.append(str(format_datetime(date_n[i])))
+        # print(date_n[i])
+    temp = list(meteo_n['temp'])
+    for i in range(len(temp)):
+        temp[i] = float(temp[i])
+    light = list(meteo_n['light'])
+    for i in range(len(light)):
+        light[i] = float(light[i])
+    wind_speed = list(meteo_n['wind_speed'])
+    for i in range(len(wind_speed)):
+        wind_speed[i] = float(wind_speed[i])
+    press = list(meteo_n['press'])
+    for i in range(len(press)):
+        press[i] = float(press[i])
+    voltage = list(meteo_n['voltage'])
+    for i in range(len(voltage)):
+        voltage[i] = float(voltage[i])
+
+    return template.render(data=b, team=team_id,
+                                   date_n = date_s,
+                                   temp_y = temp,
+                                   wind_y = wind_speed,
+                                   press_y = press,
+                                   voltage_y = voltage,
+                                   light_y = light,
+                                   )
 
 @app.route('/')
 def index():
