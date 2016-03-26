@@ -14,6 +14,10 @@ app = Flask(__name__)
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 
+def j_min(d_list):
+    return min(d_list)
+def j_max(value):
+    return max(d_list)
 def format_datetime(value, format='medium'):
     print(value)
     value = parse(str(value))
@@ -25,6 +29,8 @@ def format_datetime(value, format='medium'):
     return dates.format_datetime(value, format, tzinfo=dates.get_timezone('Asia/Vladivostok'))
 
 env.filters['datetime'] = format_datetime
+env.filters['min'] = j_min
+env.filters['max'] = j_max
 app.config['STATIC_FOLDER'] = 'templates'
 env.filters['jsonify'] = json.dumps
 

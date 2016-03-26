@@ -15,16 +15,23 @@
                           "type":"scatter","name":"Wind Speed","uid":"3216c3"}];
   var wind_layout = {
       "autosize":true,
-      "yaxis":{"range":[-3.0114765241166843,32.73879618435725],
+      "yaxis":{"range":[getMinOfArray({{wind_y|jsonify}}),getMaxOfArray({{wind_y|jsonify}})],
       "type":"linear","autorange":false,"title":"Wind Speed, metres per seconds"},
       "title":"Wind Speed","height":570,"width":1040,
       "xaxis":{"range":[-1.5388213557997368,47.796554981894296],
       "type":"category","autorange":false}};
-
+    function getMaxOfArray(numArray) {
+      return Math.max.apply(null, numArray);
+    }
+    function getMinOfArray(numArray) {
+      return Math.min.apply(null, numArray);
+    }
     var pressure_data = [{"y": {{press_y|jsonify}}, "x": {{date_n|jsonify}}, "type":"scatter","name":"Pressure","uid":"19a06c"}];
-    var pressure_layout = {"autosize":true,"yaxis":{"range":[1019.8888888888889,1022.1111111111111],"type":"linear","autorange":true,"title":"Pressure, miliBar"},"title":"Pressure","height":570,"width":1040,"xaxis":{"range":[0,46],"type":"category","autorange":true}};
+    var pressure_layout = {"autosize":true,"yaxis":
+    {"range":[getMinOfArray({{press_y|jsonify}}),getMaxOfArray({{press_y|jsonify}})],"type":"linear","autorange":true,"title":"Pressure, miliBar"},"title":"Pressure","height":570,"width":1040,"xaxis":{"range":[0,46],"type":"category","autorange":true}};
     var temp_data = [{"y":{{temp_y|jsonify}}, "x": {{date_n|jsonify}},"type":"scatter","name":"Temperature","uid":"a59df4"}];
-    var temp_layout = {"autosize":true,"yaxis":{"range":[5.371281443567266,22.838220076394244],"type":"linear","autorange":false,"title":"Temperature, Celsium"},"title":"Temperature","height":570,"width":1040,"xaxis":{"range":[-5.337767009329532,50.28771448290405],"type":"category","autorange":false}};
+    var temp_layout = {"autosize":true,"yaxis":
+    {"range":[getMinOfArray({{temp_y|jsonify}}),getMaxOfArray({{temp_y|jsonify}})],"type":"linear","autorange":false,"title":"Temperature, Celsium"},"title":"Temperature","height":570,"width":1040,"xaxis":{"range":[-5.337767009329532,50.28771448290405],"type":"category","autorange":false}};
 
     var v_l_data = [
       {
@@ -38,7 +45,18 @@
         {"y":[5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8,5.8],
          "x":{{date_n|jsonify}},
          "type":"scatter","name":"Voltage_off","uid":"b41aea"}];
-    var v_l_layout = {"autosize":true,"yaxis":{"range":[5.575069211863401,8.170669658974285],"type":"linear","autorange":false,"title":"Voltage, Volt"},"title":"Comparing Voltage and Light","height":570,"width":1040,"yaxis2":{"tickfont":{"color":"rgb(148, 103, 189)"},"title":"Light","range":[-41.18510321291626,687.9426587482309],"autorange":false,"overlaying":"y","titlefont":{"color":"rgb(148, 103, 189)"},"type":"linear","side":"right"},"xaxis":{"range":[-0.5661345960415005,48.27834654504506],"type":"category","autorange":false}};
+    var v_l_layout = {"autosize":true,
+    "yaxis":{
+      "range":[getMinOfArray({{voltage_y|jsonify}}),getMaxOfArray({{voltage_y|jsonify}})],
+      "type":"linear","autorange":false,"title":"Voltage, Volt"},
+      "title":"Comparing Voltage and Light","height":570,"width":1040,
+      "yaxis2":{"tickfont":{"color":"rgb(148, 103, 189)"},
+      "title":"Light",
+      "range":[getMinOfArray({{light_y|jsonify}}),getMaxOfArray({{light_y|jsonify}})],
+      "autorange":false,"overlaying":"y",
+      "titlefont":{"color":"rgb(148, 103, 189)"},"type":"linear","side":"right"},
+      "xaxis":{"range":[-0.5661345960415005,48.27834654504506],
+      "type":"category","autorange":false}};
 
   Plotly.plot('wind-graph', wind_data, wind_layout);
   Plotly.plot('pressure-graph', pressure_data, pressure_layout);
