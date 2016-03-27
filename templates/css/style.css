@@ -1,0 +1,368 @@
+	#my_date {
+	display: inline-block;
+}
+
+p.inline {
+	display: inline-block;
+}
+
+a{
+	text-decoration: underline;
+}
+
+iframe {
+	position: absolute;
+	left: 0px
+}
+
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+
+img {
+	width: 100%;
+	height: auto;
+	}
+
+div.my_tb{
+margin-top: 50px
+
+}
+
+div.game{
+	height: 402px;
+	padding: 0px 25px 0px 0px;
+	margin: 0px;
+}
+
+div.game h1 {
+	margin: 0px;
+	padding: 0px;
+}
+
+div.link_grap p {
+  text-align: left;
+  display: block;
+  position: absolute;
+  margin: 50% 0% 0% 13%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+div.link_grap{
+	border-radius: 15px;
+	background-image: url("../img/grap.png");
+	padding: 0px;
+	margin: 0px;
+	height: 402px;
+}
+
+div.link_grap h1{
+	margin: 0px;
+}
+
+div.link_grap_wrapper{
+	margin: 0px;
+}
+
+div.my-footer {
+	text-align: center;
+	margin: 25px 25px 15px 25px;
+}
+
+h2.h_no_margin {
+	margin: 0px;
+	margin-top: -10px;
+	padding: 0px;
+}
+
+
+div.background_sea {
+	background-image: url("../img/sea.png");
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+}
+
+div.background_white{
+	background-color: white;
+	z-index: 1
+
+}
+
+div.light_blue {
+	background-color: #e3f2fd;
+	border-radius: 15px;
+}
+
+div.main_widget {
+	margin-left: -15px;
+	color: white;
+	padding: 20px;
+	border-radius: 15px;
+	background-image: url("../img/sunny.png");
+	height: 300px;
+	width: 370px;
+}
+
+div.wrapper_sea {
+	margin: 20px;
+}
+
+div.block_signs{
+	width: 365px;
+	height: 210px;
+}
+div.block_weather {
+	width: 340px;
+	height: 245px;
+}
+
+h4.header_signs {
+	font-size: 12px;
+  	color: rgb(0, 0, 0);
+  	font-weight: bold;
+  	text-transform: uppercase;
+  	line-height: 1.2;
+  	margin-top: 20px;
+  	letter-spacing: 0.5px;
+}
+
+p.text_signs {
+	font-size: 16px;
+	color: rgb(0, 0, 0);
+	line-height: 1.2;
+}
+
+div.block_advice {
+	margin-top: 10px;
+	width: 340px;
+	height: 100px;
+}
+
+h4.text_advice {
+	padding-left: 12px;
+	padding-top: 20px;
+	font-size: 12px;
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 1.2;
+	letter-spacing: 0.5px;
+}
+
+p.text_advice{
+	font-size: 16px;
+	color: rgb(0, 0, 0);
+	line-height: 1.2;
+	margin-left: 12px;
+	margin-right: 12px;`
+}
+
+
+table.main_weather {
+  font-size: 19px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  line-height: 1.136;
+}
+
+td.table_wind {
+  font-size: 17px;
+  color: rgb(0, 0, 0);
+  line-height: 1.471;
+  font-weight: normal;
+}
+
+img {
+text-align: center;
+	width: 32px;
+	height: 32px;
+}
+
+div.main_widget > h5 {
+	margin-top: 0px;
+  margin-left: 35px;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  line-height: 1.2;
+}
+
+div.main_widget > p {
+	margin-left: 35px;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  line-height: 1.5;
+}
+
+div.main_widget > h1 {
+  font-size: 72px;
+  color: rgb(255, 255, 255);
+  line-height: 1.2;
+  margin-left: 35px;
+}
+
+img.big_icon {
+	color: white;
+	float: right;
+	height: 72px;
+	width: 72px;
+	margin-right: 25%;
+}
+
+div.main_widget > p > span {
+	display: inline-block;
+	float: right;
+	margin-right: 25%;
+}
+
+h2.main_head {
+
+  font-size:32px;
+  font-family: "MuseoSansCyrl";
+  color: rgb(54, 170, 225);
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+h5.second_head{
+  font-size: 16px;
+  color: rgb(18, 153, 216);
+  line-height: 1.2;
+}
+
+h5.second_head > a {
+  font-size: 16px;
+  color: rgb(18, 153, 216);
+  line-height: 1.2;
+  text-decoration: underline;
+}
+
+img.img_okean {
+	margin-top: -40px;
+	width: 250px;
+	height: auto;
+
+}
+
+table.navbar td {
+	padding-right: 15px;
+}
+
+table.navbar  a {
+  font-size: 14px;
+  color: rgb(18, 153, 216);
+  text-decoration: underline;
+  line-height: 1.2;
+}
+
+table.navbar span {
+  color: rgb(18, 153, 216);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+
+div.full_view {
+	background-color: rgb(54, 170, 225);
+	height: 50px;
+	text-align: center;
+}
+
+div.full_view a {
+	color: white;
+	text-decoration: underline;
+	display: inline-block;
+	margin-top: 13px;
+}
+
+div.copyright p{
+	display: block;
+	margin-left: 57px
+}
+
+
+/* Calendar style */
+.fc{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #e3f2fd
+}
+
+.fc th, .fc td {
+	border-color: transparent;
+}
+
+th.fc-day {
+	text-align: left;
+}
+
+td.fc-day{
+	border-right: 1px solid black;
+
+}
+
+.fc td.fc-today {
+	border-style: solid
+}
+
+.fc th{
+	text-align: left;
+	padding-left: 15px;
+}
+
+th.fc-sat, th.fc-sun{
+	color: #f10000;
+}
+
+div.cal_icon {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+div.cal_temp{
+	padding-left: 10px;
+
+}
+
+div.cal_wind{
+	padding-left: 10px;
+}
+
+/* Calendar end */
+
+div.dropdown_wrapper {
+	position: absolute;
+	left: 65%;
+	top: 5%;
+}
+
+div.dropdown_wrapper h4{
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 0.5px;
+}
+
+
+select {
+	text-align: left;
+	width: 200px;
+	height: 25px;
+}
+/* Chelovechek */
+.chelovechek img {
+	
+}

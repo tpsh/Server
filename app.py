@@ -4,38 +4,92 @@ from datetime import datetime
 from Analyze import FindMean
 
 import json
+from dateutil.parser import parse
+from babel import dates
+import pandas
 from bson import json_util
 app = Flask(__name__)
 
+
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
-app.config['STATIC_FOLDER'] = 'templates'
 
+def j_min(d_list):
+    return min(d_list)
+def j_max(value):
+    return max(d_list)
+def format_datetime(value, format='medium'):
+    print(value)
+    value = parse(str(value))
+
+    if format == 'full':
+        format="EEEE, d. MMMM y 'at' HH:mm"
+    elif format == 'medium':
+        format="EE dd.MM.y HH:mm"
+    return dates.format_datetime(value, format, tzinfo=dates.get_timezone('Asia/Vladivostok'))
+
+env.filters['datetime'] = format_datetime
+env.filters['min'] = j_min
+env.filters['max'] = j_max
+app.config['STATIC_FOLDER'] = 'templates'
+env.filters['jsonify'] = json.dumps
 
 @app.route('/css/<path:path>')
 def send_css(path):
-    return send_from_directory('templates/Template/css', path)
+    return send_from_directory('templates/css', path)
 @app.route('/js/<path:path>')
 def send_js(path):
-    return send_from_directory('templates/Template/js', path)
+    return send_from_directory('templates/js', path)
 @app.route('/img/<path:path>')
 def send_img(path):
-    return send_from_directory('templates/Template/img', path)
+    return send_from_directory('templates/img', path)
 @app.route('/src/<path:path>')
 def send_src(path):
-    return send_from_directory('templates/Template/src', path)
+    return send_from_directory('templates/src', path)
+
 @app.route('/team/<team_id>')
 def send_MS(team_id):
     b = Mesurement.query.raw_output()
     b = b.filter(Mesurement.team == int(team_id)).all()
+
+    meteo_n = pandas.DataFrame(b)
+    date_n = meteo_n['date']
     template = env.get_template('team.html')
-    return template.render(data=b, team=team_id)
+    date_s = []
+    print(date_n)
+
+    for i in range(len(date_n)):
+        date_s.append(str(format_datetime(date_n[i])))
+        # print(date_n[i])
+    temp = list(meteo_n['temp'])
+    for i in range(len(temp)):
+        temp[i] = float(temp[i])
+    light = list(meteo_n['light'])
+    for i in range(len(light)):
+        light[i] = float(light[i])
+    wind_speed = list(meteo_n['wind_speed'])
+    for i in range(len(wind_speed)):
+        wind_speed[i] = float(wind_speed[i])
+    press = list(meteo_n['press'])
+    for i in range(len(press)):
+        press[i] = float(press[i])
+    voltage = list(meteo_n['voltage'])
+    for i in range(len(voltage)):
+        voltage[i] = float(voltage[i])
+
+    return template.render(data=b, team=team_id,
+                                   date_n = date_s,
+                                   temp_y = temp,
+                                   wind_y = wind_speed,
+                                   press_y = press,
+                                   voltage_y = voltage,
+                                   light_y = light,
+                                   )
 
 @app.route('/')
 def index():
-
     a = Mesurement.query.raw_output()
-    a = a.descending(Mesurement.data).limit(3)
+    a = a.descending(Mesurement.date).limit(3)
     z = a
     Average = FindMean(z)
 
@@ -50,10 +104,54 @@ def index():
                 # s.append(element)
                 sign.append(element['text'])
     # sign = b.['text']
-    # sign = s['text']
-    template = env.get_template('Template/index.html')
+    template = env.get_template('index.html')
     # return json.dumps(ok, default=json_util.default)
-    return template.render(mesurement = Average, sign = sign)
+    week = [{
+        "temp" : 6,
+        "wind_speed" : 3
+    },{
+        "temp" : 5,
+        "wind_speed" : 10
+    },{
+        "temp" : 7,
+        "wind_speed" : 18
+    },{
+        "temp" : 9,
+        "wind_speed" : 4
+    },{
+        "temp" : 8,
+        "wind_speed" : 1
+    },{
+        "temp" : 7,
+        "wind_speed" : 5
+    },{
+        "temp" : 10,
+        "wind_speed" : 2
+    }]
+    Average['temp'] = int(Average['temp'])
+    return template.render(mesurement = Average, sign = {}, week = week) #sign
+
+@app.route('/top')
+def top():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date').limit(20)
+    template = env.get_template('top.html')
+    return template.render(mesurements=a)
+
+
+@app.route('/csv')
+def csv():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date')
+    template = env.get_template('csv.html')
+    return template.render(mesurements=a)
+
+@app.route('/table')
+def table():
+    a = Mesurement.query.raw_output()
+    a = a.descending('date')
+    template = env.get_template('table.html')
+    return template.render(mesurements=a)
 
 @app.route('/create_signs')
 def create_signs():
@@ -286,16 +384,20 @@ def map():
 @app.route('/submit', methods=['POST'])
 def submit():
 
-    data = json.loads(request.data.decode("utf-8"))
-    for element in data:
-        mesuremsent = Mesurement(temp = element['temp'],
-                                 illumination = element['illumination'],
-                                 wind_speed = element['wind_speed'],
-                                 pressure = element['pressure'],
-                                 date = datetime.today())
-        mesuremsent.save()
+    data_srt = request.data.decode("utf-8")
+    data = json.loads(data_srt)
 
-    return "saved"
+    mesurement = Mesurement(temp=data['temp'],
+        light=data['light'],
+        wind_speed=data['wind'],
+        press=data['press'],
+        voltage=data['voltage'],
+        team=data['team'],
+        date=datetime.today()
+        )
+    mesurement.save()
+
+    return data_srt
 
 
 if __name__ == '__main__':
